@@ -42,11 +42,11 @@ class StopsStub:
         self.GetStop = channel.unary_unary(
                 '/Stops/GetStop',
                 request_serializer=stops__pb2.StopIdRequest.SerializeToString,
-                response_deserializer=stops__pb2.StopNameResponse.FromString,
+                response_deserializer=stops__pb2.GetStopNameResponse.FromString,
                 _registered_method=True)
         self.UpdateStop = channel.unary_unary(
                 '/Stops/UpdateStop',
-                request_serializer=stops__pb2.StopIdRequest.SerializeToString,
+                request_serializer=stops__pb2.UpdateStopRequest.SerializeToString,
                 response_deserializer=stops__pb2.OperationResponse.FromString,
                 _registered_method=True)
         self.DeleteStop = channel.unary_unary(
@@ -56,8 +56,8 @@ class StopsStub:
                 _registered_method=True)
         self.TransformStops = channel.unary_unary(
                 '/Stops/TransformStops',
-                request_serializer=stops__pb2.StopIdListRequest.SerializeToString,
-                response_deserializer=stops__pb2.StopNameListResponse.FromString,
+                request_serializer=stops__pb2.StopIdTransformRequest.SerializeToString,
+                response_deserializer=stops__pb2.StopNameTransformResponse.FromString,
                 _registered_method=True)
 
 
@@ -105,11 +105,11 @@ def add_StopsServicer_to_server(servicer, server):
             'GetStop': grpc.unary_unary_rpc_method_handler(
                     servicer.GetStop,
                     request_deserializer=stops__pb2.StopIdRequest.FromString,
-                    response_serializer=stops__pb2.StopNameResponse.SerializeToString,
+                    response_serializer=stops__pb2.GetStopNameResponse.SerializeToString,
             ),
             'UpdateStop': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateStop,
-                    request_deserializer=stops__pb2.StopIdRequest.FromString,
+                    request_deserializer=stops__pb2.UpdateStopRequest.FromString,
                     response_serializer=stops__pb2.OperationResponse.SerializeToString,
             ),
             'DeleteStop': grpc.unary_unary_rpc_method_handler(
@@ -119,8 +119,8 @@ def add_StopsServicer_to_server(servicer, server):
             ),
             'TransformStops': grpc.unary_unary_rpc_method_handler(
                     servicer.TransformStops,
-                    request_deserializer=stops__pb2.StopIdListRequest.FromString,
-                    response_serializer=stops__pb2.StopNameListResponse.SerializeToString,
+                    request_deserializer=stops__pb2.StopIdTransformRequest.FromString,
+                    response_serializer=stops__pb2.StopNameTransformResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -176,7 +176,7 @@ class Stops:
             target,
             '/Stops/GetStop',
             stops__pb2.StopIdRequest.SerializeToString,
-            stops__pb2.StopNameResponse.FromString,
+            stops__pb2.GetStopNameResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -202,7 +202,7 @@ class Stops:
             request,
             target,
             '/Stops/UpdateStop',
-            stops__pb2.StopIdRequest.SerializeToString,
+            stops__pb2.UpdateStopRequest.SerializeToString,
             stops__pb2.OperationResponse.FromString,
             options,
             channel_credentials,
@@ -256,8 +256,8 @@ class Stops:
             request,
             target,
             '/Stops/TransformStops',
-            stops__pb2.StopIdListRequest.SerializeToString,
-            stops__pb2.StopNameListResponse.FromString,
+            stops__pb2.StopIdTransformRequest.SerializeToString,
+            stops__pb2.StopNameTransformResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -2,4 +2,4 @@ import os
 
 from sqlalchemy import create_engine
 
-engine = create_engine(os.getenv("DATABASE_URL"), echo=True)
+engine = create_engine(os.getenv("DB_URL"), echo=True)

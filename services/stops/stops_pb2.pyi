@@ -1,8 +1,8 @@
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
-from collections.abc import Iterable as _Iterable
-from typing import ClassVar as _ClassVar, Optional as _Optional
+from collections.abc import Iterable as _Iterable, Mapping as _Mapping
+from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
@@ -13,12 +13,22 @@ class AddStopRequest(_message.Message):
     def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class OperationResponse(_message.Message):
-    __slots__ = ("success", "stop_id")
-    SUCCESS_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("error", "msg", "stop_id")
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    MSG_FIELD_NUMBER: _ClassVar[int]
     STOP_ID_FIELD_NUMBER: _ClassVar[int]
-    success: bool
+    error: bool
+    msg: str
     stop_id: int
-    def __init__(self, success: _Optional[bool] = ..., stop_id: _Optional[int] = ...) -> None: ...
+    def __init__(self, error: _Optional[bool] = ..., msg: _Optional[str] = ..., stop_id: _Optional[int] = ...) -> None: ...
+
+class GetStopNameResponse(_message.Message):
+    __slots__ = ("stop_name", "error")
+    STOP_NAME_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    stop_name: str
+    error: OperationResponse
+    def __init__(self, stop_name: _Optional[str] = ..., error: _Optional[_Union[OperationResponse, _Mapping]] = ...) -> None: ...
 
 class StopIdRequest(_message.Message):
     __slots__ = ("stop_id",)
@@ -26,20 +36,37 @@ class StopIdRequest(_message.Message):
     stop_id: int
     def __init__(self, stop_id: _Optional[int] = ...) -> None: ...
 
-class StopNameResponse(_message.Message):
-    __slots__ = ("name",)
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    name: str
-    def __init__(self, name: _Optional[str] = ...) -> None: ...
+class UpdateStopRequest(_message.Message):
+    __slots__ = ("stop_id", "new_name")
+    STOP_ID_FIELD_NUMBER: _ClassVar[int]
+    NEW_NAME_FIELD_NUMBER: _ClassVar[int]
+    stop_id: int
+    new_name: str
+    def __init__(self, stop_id: _Optional[int] = ..., new_name: _Optional[str] = ...) -> None: ...
 
-class StopIdListRequest(_message.Message):
+class StopIdTransformRequest(_message.Message):
     __slots__ = ("stop_ids",)
     STOP_IDS_FIELD_NUMBER: _ClassVar[int]
     stop_ids: _containers.RepeatedScalarFieldContainer[int]
     def __init__(self, stop_ids: _Optional[_Iterable[int]] = ...) -> None: ...
 
-class StopNameListResponse(_message.Message):
+class StopNameMap(_message.Message):
     __slots__ = ("names",)
+    class NamesEntry(_message.Message):
+        __slots__ = ("key", "value")
+        KEY_FIELD_NUMBER: _ClassVar[int]
+        VALUE_FIELD_NUMBER: _ClassVar[int]
+        key: int
+        value: str
+        def __init__(self, key: _Optional[int] = ..., value: _Optional[str] = ...) -> None: ...
     NAMES_FIELD_NUMBER: _ClassVar[int]
-    names: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, names: _Optional[_Iterable[str]] = ...) -> None: ...
+    names: _containers.ScalarMap[int, str]
+    def __init__(self, names: _Optional[_Mapping[int, str]] = ...) -> None: ...
+
+class StopNameTransformResponse(_message.Message):
+    __slots__ = ("result", "error")
+    RESULT_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    result: StopNameMap
+    error: OperationResponse
+    def __init__(self, result: _Optional[_Union[StopNameMap, _Mapping]] = ..., error: _Optional[_Union[OperationResponse, _Mapping]] = ...) -> None: ...

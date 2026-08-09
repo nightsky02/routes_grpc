@@ -5,30 +5,49 @@ message AddStopRequest{
     string name = 1;
 }
 
+
 // For general operation Messages
 message OperationResponse{
-    bool success = 1;
-    int32 stop_id = 2;
+    bool error = 1;
+    string msg = 2;
+    int32 stop_id = 3;
 }
+
+message GetStopNameResponse{
+    oneof response {
+        string stop_name = 1;
+        OperationResponse error = 2;
+    }
+}
+
 message StopIdRequest{
     int32 stop_id = 1;
 }
-message StopNameResponse{
-    string name = 1;
+
+message UpdateStopRequest{
+    int32 stop_id = 1;
+    string new_name = 2;
 }
 
 // To comfortably work with a list of stops
-message StopIdListRequest{
+message StopIdTransformRequest{
     repeated int32 stop_ids = 1;
 }
-message StopNameListResponse{
-    repeated string names = 1;
+
+message StopNameMap{
+    map<int32, string> names = 1;
+}
+message StopNameTransformResponse{
+    oneof data{
+        StopNameMap result = 1; 
+        OperationResponse error = 2;
+    }
 }
 
 service Stops{
     rpc AddStop(AddStopRequest) returns (OperationResponse);
-    rpc GetStop(StopIdRequest) returns (StopNameResponse);
-    rpc UpdateStop(StopIdRequest) returns (OperationResponse);
+    rpc GetStop(StopIdRequest) returns (GetStopNameResponse);
+    rpc UpdateStop(UpdateStopRequest) returns (OperationResponse);
     rpc DeleteStop(StopIdRequest) returns (OperationResponse);
-    rpc TransformStops(StopIdListRequest) returns (StopNameListResponse);
+    rpc TransformStops(StopIdTransformRequest) returns (StopNameTransformResponse);
 }

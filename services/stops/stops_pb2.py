@@ -24,25 +24,33 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bstops.proto\"\x1e\n\x0e\x41\x64\x64StopRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"5\n\x11OperationResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07stop_id\x18\x02 \x01(\x05\" \n\rStopIdRequest\x12\x0f\n\x07stop_id\x18\x01 \x01(\x05\" \n\x10StopNameResponse\x12\x0c\n\x04name\x18\x01 \x01(\t\"%\n\x11StopIdListRequest\x12\x10\n\x08stop_ids\x18\x01 \x03(\x05\"%\n\x14StopNameListResponse\x12\r\n\x05names\x18\x01 \x03(\t2\x86\x02\n\x05Stops\x12.\n\x07\x41\x64\x64Stop\x12\x0f.AddStopRequest\x1a\x12.OperationResponse\x12,\n\x07GetStop\x12\x0e.StopIdRequest\x1a\x11.StopNameResponse\x12\x30\n\nUpdateStop\x12\x0e.StopIdRequest\x1a\x12.OperationResponse\x12\x30\n\nDeleteStop\x12\x0e.StopIdRequest\x1a\x12.OperationResponse\x12;\n\x0eTransformStops\x12\x12.StopIdListRequest\x1a\x15.StopNameListResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0bstops.proto\"\x1e\n\x0e\x41\x64\x64StopRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"@\n\x11OperationResponse\x12\r\n\x05\x65rror\x18\x01 \x01(\x08\x12\x0b\n\x03msg\x18\x02 \x01(\t\x12\x0f\n\x07stop_id\x18\x03 \x01(\x05\"[\n\x13GetStopNameResponse\x12\x13\n\tstop_name\x18\x01 \x01(\tH\x00\x12#\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x12.OperationResponseH\x00\x42\n\n\x08response\" \n\rStopIdRequest\x12\x0f\n\x07stop_id\x18\x01 \x01(\x05\"6\n\x11UpdateStopRequest\x12\x0f\n\x07stop_id\x18\x01 \x01(\x05\x12\x10\n\x08new_name\x18\x02 \x01(\t\"*\n\x16StopIdTransformRequest\x12\x10\n\x08stop_ids\x18\x01 \x03(\x05\"c\n\x0bStopNameMap\x12&\n\x05names\x18\x01 \x03(\x0b\x32\x17.StopNameMap.NamesEntry\x1a,\n\nNamesEntry\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"h\n\x19StopNameTransformResponse\x12\x1e\n\x06result\x18\x01 \x01(\x0b\x32\x0c.StopNameMapH\x00\x12#\n\x05\x65rror\x18\x02 \x01(\x0b\x32\x12.OperationResponseH\x00\x42\x06\n\x04\x64\x61ta2\x97\x02\n\x05Stops\x12.\n\x07\x41\x64\x64Stop\x12\x0f.AddStopRequest\x1a\x12.OperationResponse\x12/\n\x07GetStop\x12\x0e.StopIdRequest\x1a\x14.GetStopNameResponse\x12\x34\n\nUpdateStop\x12\x12.UpdateStopRequest\x1a\x12.OperationResponse\x12\x30\n\nDeleteStop\x12\x0e.StopIdRequest\x1a\x12.OperationResponse\x12\x45\n\x0eTransformStops\x12\x17.StopIdTransformRequest\x1a\x1a.StopNameTransformResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'stops_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
+  _globals['_STOPNAMEMAP_NAMESENTRY']._loaded_options = None
+  _globals['_STOPNAMEMAP_NAMESENTRY']._serialized_options = b'8\001'
   _globals['_ADDSTOPREQUEST']._serialized_start=15
   _globals['_ADDSTOPREQUEST']._serialized_end=45
   _globals['_OPERATIONRESPONSE']._serialized_start=47
-  _globals['_OPERATIONRESPONSE']._serialized_end=100
-  _globals['_STOPIDREQUEST']._serialized_start=102
-  _globals['_STOPIDREQUEST']._serialized_end=134
-  _globals['_STOPNAMERESPONSE']._serialized_start=136
-  _globals['_STOPNAMERESPONSE']._serialized_end=168
-  _globals['_STOPIDLISTREQUEST']._serialized_start=170
-  _globals['_STOPIDLISTREQUEST']._serialized_end=207
-  _globals['_STOPNAMELISTRESPONSE']._serialized_start=209
-  _globals['_STOPNAMELISTRESPONSE']._serialized_end=246
-  _globals['_STOPS']._serialized_start=249
-  _globals['_STOPS']._serialized_end=511
+  _globals['_OPERATIONRESPONSE']._serialized_end=111
+  _globals['_GETSTOPNAMERESPONSE']._serialized_start=113
+  _globals['_GETSTOPNAMERESPONSE']._serialized_end=204
+  _globals['_STOPIDREQUEST']._serialized_start=206
+  _globals['_STOPIDREQUEST']._serialized_end=238
+  _globals['_UPDATESTOPREQUEST']._serialized_start=240
+  _globals['_UPDATESTOPREQUEST']._serialized_end=294
+  _globals['_STOPIDTRANSFORMREQUEST']._serialized_start=296
+  _globals['_STOPIDTRANSFORMREQUEST']._serialized_end=338
+  _globals['_STOPNAMEMAP']._serialized_start=340
+  _globals['_STOPNAMEMAP']._serialized_end=439
+  _globals['_STOPNAMEMAP_NAMESENTRY']._serialized_start=395
+  _globals['_STOPNAMEMAP_NAMESENTRY']._serialized_end=439
+  _globals['_STOPNAMETRANSFORMRESPONSE']._serialized_start=441
+  _globals['_STOPNAMETRANSFORMRESPONSE']._serialized_end=545
+  _globals['_STOPS']._serialized_start=548
+  _globals['_STOPS']._serialized_end=827
 # @@protoc_insertion_point(module_scope)
