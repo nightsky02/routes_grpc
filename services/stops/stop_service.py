@@ -38,7 +38,7 @@ class StopService(StopsServicer):
             )
 
         return grpc_messages.GetStopNameResponse(
-            error_response=grpc_messages.OperationResponse(
+            error=grpc_messages.OperationResponse(
                 error=True,
                 msg="There is no a stop with the following id"
             )
@@ -110,6 +110,8 @@ class StopService(StopsServicer):
         # Implement the logic to transform a list of stop IDs into their corresponding names
         # You can access the list of stop IDs using request.stop_ids
         # and return a StopNameListResponse with the list of stop names.
+
+        print(f"---- Inside TransformStop ---")
         if not validate_list_of_ids(request.stop_ids):
             return grpc_messages.StopNameTransformResponse(
                 error=grpc_messages.OperationResponse(
@@ -117,19 +119,23 @@ class StopService(StopsServicer):
                     msg="Some of given ids is/are invalid"
                 ))
 
+        print(f"---- Validation of ids has been finished ---")
         
         try:
             data = db_api.select_stops(request.stop_ids)
+            print(f"---- Data from db got---")
             no_found_stops_ids = set(request.stop_ids).difference(set(data.keys()))
 
             for id in no_found_stops_ids:
                 data[id] = ""
 
+            print(f"---- Data is filtered ---")
             return grpc_messages.StopNameTransformResponse(
                 result=grpc_messages.StopNameMap(names=data)
             )
         
         except db_exc.PStopServiceDbException as err:
+            print(f"---- Have some error: {err}---")
             return grpc_messages.StopNameTransformResponse(
                 error=grpc_messages.OperationResponse(
                     error=True,
